@@ -13,7 +13,7 @@ from flask import Flask, Response, stream_with_context
 
 
 class OmniChatServer(object):
-    def __init__(self, ip='0.0.0.0', port=60808, run_app=True,
+    def __init__(self, ip='127.0.0.1', port=60808, run_app=True,
                  ckpt_dir='./checkpoint', device='cuda:0') -> None:
         server = Flask(__name__)
         # CORS(server, resources=r"/*")
@@ -46,7 +46,7 @@ class OmniChatServer(object):
             print(traceback.format_exc())
 
 
-# CUDA_VISIBLE_DEVICES=1 gunicorn -w 2 -b 0.0.0.0:60808 'server:create_app()'
+# CUDA_VISIBLE_DEVICES=1 gunicorn -w 2 -b 127.0.0.1:60808 'server:create_app()'
 def create_app():
     server = OmniChatServer(run_app=False)
     return server.server
